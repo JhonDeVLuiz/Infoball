@@ -1,0 +1,7 @@
+{
+  "name": "meuCard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
