@@ -26,3 +26,19 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+
+ion-item {
+  --padding-start: 0;
+  background-color: #fffefe;
+}
+
+ion-menu {
+  --background: #fffefe; 
+  
+}
+
+.btn-ok {
+  color: #28a745; /* Verde */
+  font-weight: bold;
+}
+
