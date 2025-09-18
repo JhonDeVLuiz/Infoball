@@ -3,13 +3,15 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content >
         <ion-list id="inbox-list" >
-          <ion-list-header>Brasileirão</ion-list-header>
+          
+          <ion-list-header class="h1">Infobal</ion-list-header>
+           <ion-icon slot="start" name="accessibility-outline"></ion-icon>
           <ion-note></ion-note>
 
           @for (p of appPages; track p; let i = $index) {
             <ion-menu-toggle auto-hide="false">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                 <ion-label color dark>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>

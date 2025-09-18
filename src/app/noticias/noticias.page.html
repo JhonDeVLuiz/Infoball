@@ -1,63 +1,94 @@
-<ion-header>
-  <ion-toolbar >
+<ion-header [translucent]="true">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button class="sucesso"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Notícias do Brasileirão</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="refresh"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Notícias & Futebol</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+     <ion-searchbar
+      [(ngModel)]="searchQuery"
+      (ionInput)="filterArticles()" 
+      placeholder="Buscar notícias..."
+      animated="true"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" color="success">
-  <ion-card>
-    <img src="https://placehold.co/800x400/e60023/white?text=Flamengo" alt="Flamengo vence clássico" />
-    <ion-card-header>
-      <ion-card-title>Flamengo vence clássico em jogo emocionante</ion-card-title>
-      <ion-card-subtitle>04/09/2025 • Estádio: Maracanã</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      Em um jogo emocionante diante de mais de 60 mil torcedores, o Flamengo venceu por 3x2 no clássico contra o Fluminense no Maracanã. 
-      Os gols foram marcados por Gabriel Barbosa (2) e Arrascaeta, garantindo a vitória em um confronto intenso. 
-      A torcida rubro-negra lotou o estádio e celebrou o importante triunfo.
-      <ion-button fill="clear" size="small" style="margin-top: 10px;">
-        Ler mais
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+<ion-content [fullscreen]="true" class="ion-padding" color="success">
 
-  <ion-card>
-    <img src="https://placehold.co/800x400/006633/white?text=Palmeiras" alt="Palmeiras segue na liderança" />
-    <ion-card-header>
-      <ion-card-title>Palmeiras segue na liderança após vitória fora de casa</ion-card-title>
-      <ion-card-subtitle>04/09/2025 • Local: Arena Corinthians</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      O Palmeiras manteve a liderança isolada do campeonato após vencer o Corinthians por 1x0 na Neo Química Arena. 
-      Raphael Veiga marcou o gol da vitória com um belo chute de fora da área. 
-      Com o resultado, o Verdão chega a 42 pontos e abre vantagem na ponta da tabela.
-      <ion-button fill="clear" size="small" style="margin-top: 10px;">
-        Ler mais
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-  
-  <ion-card>
-    <img src="https://placehold.co/800x400/0000ff/white?text=Atlético-MG" alt="Atlético-MG empata em casa" />
-    <ion-card-header>
-      <ion-card-title>Atlético-MG empata em casa contra o São Paulo</ion-card-title>
-      <ion-card-subtitle>04/09/2025 • Estádio: Mineirão</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      Em jogo equilibrado no Mineirão, Atlético-MG e São Paulo empataram em 1x1. 
-      Hulk abriu o placar para o Galo, mas Calleri empatou para o Tricolor paulista no segundo tempo. 
-      O resultado mantém o Atlético-MG no G4, mas deixa os mineiros insatisfeitos com o ponto perdido em casa.
-      <ion-button fill="clear" size="small" style="margin-top: 10px;">
-        Ler mais
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando...</p>
+  </div>
+
+  <!-- Error Message -->
+ <ion-alert
+  *ngIf="error"
+  header="Erro"
+  [message]="error"
+  [buttons]="[
+    { text: 'Cancelar', role: 'cancel' },
+    { text: 'Tentar Novamente', role: 'retry' }
+  ]"
+></ion-alert>
+
+
+  <!-- Notícias -->
+  <h2 >📰 Últimas Notícias</h2>
+  <ion-list *ngIf="articles && articles.length > 0; else noNews">
+    <ion-item *ngFor="let article of filteredArticles" lines="full">
+      <ion-thumbnail slot="start">
+        <img [src]="article.urlToImage || 'https://via.placeholder.com/150'" alt="Imagem da notícia" />
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ article.title || 'Sem título' }}</h3>
+        <p>{{ article.description || 'Sem descrição' }}</p>
+        <small>{{ article.publishedAt | date:'dd/MM/yyyy HH:mm' }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noNews>
+    <ion-card>
+      <ion-card-content>
+        Nenhuma notícia encontrada.
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <!-- Dados de Futebol -->
+  <h2>⚽ Dados do Futebol</h2>
+  <ion-list *ngIf="futebolData && futebolData.length > 0; else noFutebol">
+    <ion-item *ngFor="let item of futebolData" lines="full">
+      <ion-label>
+        <h3>{{ item.nome || item.name || 'Sem nome' }}</h3>
+        <p>{{ item.descricao || item.description || 'Sem descrição' }}</p>
+        <small *ngIf="item.data_inicio">Início: {{ item.data_inicio | date:'dd/MM/yyyy' }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noFutebol>
+    <ion-card>
+      <ion-card-content>
+        Nenhum dado de futebol disponível.
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <!-- Botão para recarregar -->
+  <div class="reload-actions">
+    <ion-button expand="block" (click)="loadNews()" fill="outline">
+      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+      Recarregar Notícias
+    </ion-button>
+    <ion-button expand="block" (click)="loadFutebol()" fill="outline">
+      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+      Recarregar Futebol
+    </ion-button>
+  </div>
+
 </ion-content>
