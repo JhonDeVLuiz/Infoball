@@ -3,70 +3,56 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Notícias & Futebol</ion-title>
+    <ion-title>Campeonatos</ion-title>
   </ion-toolbar>
 
-  <ion-toolbar>
-     <ion-searchbar
-      [(ngModel)]="searchQuery"
-      (ionInput)="filterArticles()" 
-      placeholder="Buscar notícias..."
-      animated="true"
-    ></ion-searchbar>
+  <!-- erro ao filtrar -->
+  <ion-toolbar> 
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="loadNews()" placeholder="Buscar campeonato..."
+      animated="true"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" color="success">
 
-  <!-- Loading Spinner -->
+  
   <div class="loading-container" *ngIf="loading">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Carregando...</p>
   </div>
 
-  <!-- Error Message -->
- <ion-alert
-  *ngIf="error"
-  header="Erro"
-  [message]="error"
-  [buttons]="[
+  
+  <ion-alert *ngIf="error" header="Erro" [message]="error" [buttons]="[
     { text: 'Cancelar', role: 'cancel' },
     { text: 'Tentar Novamente', role: 'retry' }
-  ]"
-></ion-alert>
+  ]"></ion-alert>
 
+ <ion-header [translucent]="true">
 
-  <!-- Notícias -->
-  <h2 >📰 Últimas Notícias</h2>
-  <ion-list *ngIf="articles && articles.length > 0; else noNews">
-    <ion-item *ngFor="let article of filteredArticles" lines="full">
-      <ion-thumbnail slot="start">
-        <img [src]="article.urlToImage || 'https://via.placeholder.com/150'" alt="Imagem da notícia" />
-      </ion-thumbnail>
-      <ion-label>
-        <h3>{{ article.title || 'Sem título' }}</h3>
-        <p>{{ article.description || 'Sem descrição' }}</p>
-        <small>{{ article.publishedAt | date:'dd/MM/yyyy HH:mm' }}</small>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+</ion-header>
 
-  <ng-template #noNews>
-    <ion-card>
-      <ion-card-content>
-        Nenhuma notícia encontrada.
-      </ion-card-content>
-    </ion-card>
-  </ng-template>
+<ion-content [fullscreen]="true" class="ion-padding" color="success">
 
   <!-- Dados de Futebol -->
-  <h2>⚽ Dados do Futebol</h2>
+  <h2>⚽ Campeonatos</h2>
   <ion-list *ngIf="futebolData && futebolData.length > 0; else noFutebol">
     <ion-item *ngFor="let item of futebolData" lines="full">
+      <ion-thumbnail slot="start" *ngIf="item.logo">
+        <img [src]="item.logo" alt="Logo do {{ item.nome }}" />
+      </ion-thumbnail>
       <ion-label>
-        <h3>{{ item.nome || item.name || 'Sem nome' }}</h3>
-        <p>{{ item.descricao || item.description || 'Sem descrição' }}</p>
-        <small *ngIf="item.data_inicio">Início: {{ item.data_inicio | date:'dd/MM/yyyy' }}</small>
+        <h3>{{ item.nome || 'Sem nome' }}</h3>
+        <p>
+          <strong>Nome popular:</strong> {{ item.nome_popular || '-' }}<br>
+          <strong>Tipo:</strong> {{ item.tipo || '-' }}<br>
+          <strong>Status:</strong> {{ item.status || '-' }}<br>
+          <strong>Temporada:</strong> {{ item.edicao_atual?.temporada || '-' }}<br>
+          <strong>Fase atual:</strong> {{ item.fase_atual?.nome || '-' }}<br>
+          <strong>Região:</strong> {{ item.regiao || '-' }}
+        </p>
+        <small *ngIf="item.edicao_atual?.nome">
+          Edição: {{ item.edicao_atual.nome }}
+        </small>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -81,14 +67,9 @@
 
   <!-- Botão para recarregar -->
   <div class="reload-actions">
-    <ion-button expand="block" (click)="loadNews()" fill="outline">
-      <ion-icon name="refresh-outline" slot="start"></ion-icon>
-      Recarregar Notícias
-    </ion-button>
-    <ion-button expand="block" (click)="loadFutebol()" fill="outline">
-      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+    <ion-button expand="block" (click)="loadFutebol()">
+      <ion-icon name="refresh-outline"></ion-icon>
       Recarregar Futebol
     </ion-button>
   </div>
-
 </ion-content>

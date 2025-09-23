@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import {accessibility,accessibilityOutline, accessibilitySharp,footballSharp ,footballOutline ,football, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
+import { trophyOutline, trophy, trophySharp,accessibility,accessibilityOutline, accessibilitySharp,footballSharp ,footballOutline ,football, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,12 @@ import {accessibility,accessibilityOutline, accessibilitySharp,footballSharp ,fo
 export class AppComponent {
   public appPages = [
     { title: 'Brasileirão', url: '/folder/inbox', icon: 'football' },
-    { title: 'Noticias', url: '/noticias', icon: 'paper-plane' },
+    { title: 'Campeonatos', url: '/noticias', icon: 'trophy' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
-    addIcons({accessibility,accessibilityOutline, accessibilitySharp,  football, footballOutline, footballSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+    addIcons({trophyOutline,trophy,trophySharp, accessibility,accessibilityOutline, accessibilitySharp,  football, footballOutline, footballSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
   }
 }
+
+

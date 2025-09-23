@@ -95,7 +95,7 @@ export class NoticiasPage implements OnInit {
 //     }
 //   }).subscribe({
 //     next: (response: any) => {
-//       this.articles = response; // ajuste conforme o formato retornado
+//       this.articles = response; 
 //       this.filteredArticles = [...this.articles];
 //       this.loading = false;
 //     },
@@ -117,7 +117,7 @@ loadNews() {
     }
   }).subscribe({
     next: (response: any) => {
-      // Se a API retorna um array diretamente
+   
       const rawArticles = Array.isArray(response) ? response : (response.articles || response.data || []);
 
       this.articles = rawArticles.map((item: any) => ({
