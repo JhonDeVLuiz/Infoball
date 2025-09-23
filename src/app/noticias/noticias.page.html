@@ -8,7 +8,7 @@
 
   <!-- erro ao filtrar -->
   <ion-toolbar> 
-    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="loadNews()" placeholder="Buscar campeonato..."
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterFutebol()" placeholder="Buscar campeonato..."
       animated="true"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -34,28 +34,31 @@
 <ion-content [fullscreen]="true" class="ion-padding" color="success">
 
   <!-- Dados de Futebol -->
-  <h2>⚽ Campeonatos</h2>
-  <ion-list *ngIf="futebolData && futebolData.length > 0; else noFutebol">
-    <ion-item *ngFor="let item of futebolData" lines="full">
-      <ion-thumbnail slot="start" *ngIf="item.logo">
-        <img [src]="item.logo" alt="Logo do {{ item.nome }}" />
-      </ion-thumbnail>
-      <ion-label>
-        <h3>{{ item.nome || 'Sem nome' }}</h3>
-        <p>
-          <strong>Nome popular:</strong> {{ item.nome_popular || '-' }}<br>
-          <strong>Tipo:</strong> {{ item.tipo || '-' }}<br>
-          <strong>Status:</strong> {{ item.status || '-' }}<br>
-          <strong>Temporada:</strong> {{ item.edicao_atual?.temporada || '-' }}<br>
-          <strong>Fase atual:</strong> {{ item.fase_atual?.nome || '-' }}<br>
-          <strong>Região:</strong> {{ item.regiao || '-' }}
-        </p>
-        <small *ngIf="item.edicao_atual?.nome">
-          Edição: {{ item.edicao_atual.nome }}
-        </small>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <!-- ...existing code... -->
+
+<ion-list *ngIf="futebolData && futebolData.length > 0; else noFutebol">
+  <ion-item *ngFor="let campeonato of futebolData" lines="full">
+    <ion-thumbnail slot="start" *ngIf="campeonato.logo">
+      <img [src]="campeonato.logo" alt="Logo do {{ campeonato.nome }}" />
+    </ion-thumbnail>
+    <ion-label>
+      <h3>{{ campeonato.nome || 'Sem nome' }}</h3>
+      <p>
+        <strong>Nome popular:</strong> {{ campeonato.nome_popular || '-' }}<br>
+        <strong>Tipo:</strong> {{ campeonato.tipo || '-' }}<br>
+        <strong>Status:</strong> {{ campeonato.status || '-' }}<br>
+        <strong>Temporada:</strong> {{ campeonato.edicao_atual?.temporada || '-' }}<br>
+        <strong>Fase atual:</strong> {{ campeonato.fase_atual?.nome || '-' }}<br>
+        <strong>Região:</strong> {{ campeonato.regiao || '-' }}
+      </p>
+      <small *ngIf="campeonato.edicao_atual?.nome">
+        Edição: {{ campeonato.edicao_atual.nome }}
+      </small>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<!-- ...existing code... -->
 
   <ng-template #noFutebol>
     <ion-card>

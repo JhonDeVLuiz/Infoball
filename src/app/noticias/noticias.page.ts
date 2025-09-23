@@ -67,155 +67,59 @@ export class NoticiasPage implements OnInit {
   loading: boolean = false;
   error: string = '';
   searchQuery: string = '';
-
-  apiKey = 'live_212bb356b6636b66129e445b631c64';
-   apiUrl = 'https://api.api-futebol.com.br/v1/campeonatos';
-
-
-   futebolApiKey = 'live_212bb356b6636b66129e445b631c64';
- futebolApiUrl = 'https://api.api-futebol.com.br/v1/';
-
+  futebolDataOriginal: any[] = [];
   futebolData: any[] = [];
 
+  
+  apiKey = 'live_212bb356b6636b66129e445b631c64';
+  apiUrl = 'https://api.api-futebol.com.br/v1/campeonatos';
+
+  futebolApiKey = 'live_212bb356b6636b66129e445b631c64';
+  futebolApiUrl = 'https://api.api-futebol.com.br/v1/';
+
+  
   constructor() {}
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.loadNews();
-    this.loadFutebol();
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.loadFutebol(); 
   }
 
-//   loadNews() {
-//   this.loading = true;
-//   this.error = '';
-
-//   this.http.get('https://api.api-futebol.com.br/v1/campeonatos', {
-//     headers: {
-//       'Authorization': `Bearer ${this.apiKey}`
-//     }
-//   }).subscribe({
-//     next: (response: any) => {
-//       this.articles = response; 
-//       this.filteredArticles = [...this.articles];
-//       this.loading = false;
-//     },
-//     error: (err) => {
-//       this.error = 'Erro ao carregar notícias. Tente novamente.';
-//       this.loading = false;
-//       console.error('Erro API:', err);
-//     }
-//   });
-// }
-
-loadNews() {
-  this.loading = true;
-  this.error = '';
-
-  this.http.get('https://api.api-futebol.com.br/v1/campeonatos', {
-    headers: {
-      'Authorization': `Bearer ${this.apiKey}`
-    }
-  }).subscribe({
-    next: (response: any) => {
-   
-      const rawArticles = Array.isArray(response) ? response : (response.articles || response.data || []);
-
-      this.articles = rawArticles.map((item: any) => ({
-        title: item.title || item.nome || item.headline,
-        description: item.description || item.descricao || item.summary,
-        urlToImage: item.urlToImage || item.imagem || item.image_url || 'https://via.placeholder.com/150',
-        publishedAt: item.publishedAt || item.data_inicio || item.date
-      }));
-
-      this.filteredArticles = [...this.articles];
-      this.loading = false;
-    },
-    error: (err) => {
-      this.error = 'Erro ao carregar notícias. Tente novamente.';
-      this.loading = false;
-      console.error('Erro API:', err);
-    }
-  });
-}
-
-
-
-//   loadFutebol() {
-//     this.loading = true;
-//     this.error = '';
-
-//     this.http.get(this.futebolApiUrl, {
-//       headers: {
-//         'Authorization': `Bearer ${this.futebolApiKey}`
-//       }
-//     }).subscribe({
-//       next: (response: any) => {
-//         this.futebolData = response;
-//         this.loading = false;
-//       },
-//       error: (err) => {
-//         this.error = 'Erro ao carregar dados de futebol.';
-//         this.loading = false;
-//         console.error('Erro API Futebol:', err);
-//       }
-//     });
-//   }
-
-
-//       filterArticles() {
-//     const query = this.searchQuery.toLowerCase();
-//     this.filteredArticles = this.articles.filter(article =>
-//       article.title?.toLowerCase().includes(query)
-//     );
-//   }
-// }
-
-//  loadFutebol() {
-//     this.loading = true;
-//     this.error = '';
-
-//     this.http.get(this.futebolApiUrl, {
-//       headers: {
-//         'Authorization': `Bearer ${this.futebolApiKey}`
-//       }
-//     }).subscribe({
-//       next: (response: any) => {
-//         this.futebolData = response;
-//         this.loading = false;
-//       },
-//       error: (err) => {
-//         this.error = 'Erro ao carregar dados de futebol.';
-//         this.loading = false;
-//         console.error('Erro API Futebol:', err);
-//       }
-//     });
-//   }
-
+//   
   loadFutebol() {
-  this.loading = true;
-  this.error = '';
+    this.loading = true;
+    this.error = '';
 
-  this.http.get('https://api.api-futebol.com.br/v1/campeonatos', {
-    headers: {
-      'Authorization': `Bearer ${this.futebolApiKey}`
-    }
-  }).subscribe({
-    next: (response: any) => {
-      this.futebolData = response;
-      this.loading = false;
-    },
-    error: (err) => {
-      this.error = 'Erro ao carregar dados de futebol.';
-      this.loading = false;
-      console.error('Erro API Futebol:', err);
-    }
-  });
-}
+    this.http.get('https://api.api-futebol.com.br/v1/campeonatos', {
+      headers: {
+        'Authorization': `Bearer ${this.futebolApiKey}`
+      }
+    }).subscribe({
+      next: (response: any) => {
+        this.futebolDataOriginal = response; // Guardar dados originais
+        this.futebolData = [...response]; // Criar cópia para filtrar
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Erro ao carregar dados de futebol.';
+        this.loading = false;
+        console.error('Erro API Futebol:', err);
+      }
+    });
+  }
 
-  filterArticles() {
-    const query = this.searchQuery.toLowerCase();
-    this.filteredArticles = this.articles.filter(article =>
-      article.title?.toLowerCase().includes(query)
+  filterFutebol() {
+    if (!this.searchQuery) {
+      this.futebolData = [...this.futebolDataOriginal];
+      return;
+    }
+
+    const query = this.searchQuery.toLowerCase().trim();
+    this.futebolData = this.futebolDataOriginal.filter((item: any) =>
+      item.nome?.toLowerCase().includes(query) ||
+      item.nome_popular?.toLowerCase().includes(query) ||
+      item.tipo?.toLowerCase().includes(query)
     );
   }
 }
