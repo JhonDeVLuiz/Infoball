@@ -71,22 +71,18 @@ export class NoticiasPage implements OnInit {
   futebolData: any[] = [];
 
   
-  apiKey = 'live_212bb356b6636b66129e445b631c64';
-  apiUrl = 'https://api.api-futebol.com.br/v1/campeonatos';
+  
+  futebolApiKey = 'live_8c5a3a39bb0e39223f5457be1471f5';
 
-  futebolApiKey = 'live_212bb356b6636b66129e445b631c64';
-  futebolApiUrl = 'https://api.api-futebol.com.br/v1/';
 
   
   constructor() {}
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.loadFutebol(); 
   }
-
-//   
+  
   loadFutebol() {
     this.loading = true;
     this.error = '';

@@ -118,8 +118,35 @@ ion-item.selected {
   --color: var(--ion-color-success);
 }
 
-h1 {
-  font-size: 74px;
-  font-weight: bold;
-  margin-bottom: 20px;
+
+.header-logo {
+  width: 120px;         // Tamanho ideal para menus laterais
+  height: auto;         // Mantém proporção da imagem
+  margin: 0 auto;       // Centraliza horizontalmente
+  display: block;       // Garante que o margin funcione
+  padding: 16px 0;      // Espaçamento vertical
+  object-fit: contain; 
+}
+
+
+// .header-logo {  
+//    width: 600px;        
+//    max-width: 100%;   
+//    border: 2px dashed red;       
+//   margin: 0 auto;       
+//   display: block;     
+//   padding: 16px 0;      
+//   object-fit: contain; 
+//}
+// .header-logo {
+//   width: 40px;
+//   height: 40px;
+//   margin-right: 10px;
+//   vertical-align: middle;
+// }
+
+ion-list-header.h1 {
+  display: flex;
+  align-items: center;
+  padding: 16px;
 }
