@@ -1,5 +1,5 @@
 {
-  "name": "meuCard",
+  "name": "meucard",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -28,7 +28,10 @@
     "@capacitor/status-bar": "7.0.2",
     "@ionic/angular": "^8.0.0",
     "campeonato-brasileiro-api": "^1.2.10",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "ionicons": "^7.0.0",
+    "mongoose": "^8.19.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -61,5 +64,15 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.8.0"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JhonDeVLuiz/Infoball.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JhonDeVLuiz/Infoball/issues"
+  }
 }

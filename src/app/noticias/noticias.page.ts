@@ -13,8 +13,7 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
-  IonCardTitle,
-  IonItem,
+   IonItem,
   IonLabel,
   IonList,
   IonThumbnail,
@@ -45,7 +44,6 @@ import { FormsModule } from '@angular/forms';
     IonCardContent,
     IonCardHeader,
     IonCardSubtitle,
-    IonCardTitle,
     IonItem,
     IonLabel,
     IonList,
@@ -62,7 +60,7 @@ export class NoticiasPage implements OnInit {
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
   private http = inject(HttpClient);
-  filteredArticles: any[] = []
+  //filteredArticles: any[] = []
   articles: any[] = [];
   loading: boolean = false;
   error: string = '';
@@ -93,8 +91,8 @@ export class NoticiasPage implements OnInit {
       }
     }).subscribe({
       next: (response: any) => {
-        this.futebolDataOriginal = response; // Guardar dados originais
-        this.futebolData = [...response]; // Criar cópia para filtrar
+        this.futebolDataOriginal = response; 
+        this.futebolData = [...response];
         this.loading = false;
       },
       error: (err) => {

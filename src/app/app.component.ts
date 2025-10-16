@@ -18,7 +18,7 @@ export class AppComponent {
     { title: 'Campeonatos', url: '/noticias', icon: 'trophy' },
     { title: 'Sobre', url: '/about', icon: 'accessibility' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+ 
   constructor() {
     addIcons({logoLinkedin,trophyOutline,trophy,trophySharp, accessibility,accessibilityOutline, accessibilitySharp,  football, footballOutline, footballSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp,man, manOutline});
   }

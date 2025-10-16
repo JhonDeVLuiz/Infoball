@@ -1,33 +1,31 @@
-<ion-app  color="success">
+<ion-app color="success">
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
-      <ion-content >
-        <ion-list id="inbox-list" >
+      <ion-content>
+        <ion-list id="inbox-list">
           
-          <ion-list-header class="h1" >
-             <img src="assets/box-futebol-high-resolution-logo-transparent.png" alt="Infoball Logo" class="header-logo">
+          <ion-list-header class="h1">
+            <img src="assets/box-futebol-high-resolution-logo-transparent.png" alt="Infoball Logo" class="header-logo">
           </ion-list-header>
            
           <ion-note></ion-note>
 
           @for (p of appPages; track p; let i = $index) {
             <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                <ion-label color dark>{{ p.title }}</ion-label>
+              <ion-item 
+                routerDirection="root" 
+                [routerLink]="[p.url]" 
+                lines="none" 
+                detail="false" 
+                routerLinkActive="selected">
+                <ion-icon 
+                  slot="start" 
+                  [ios]="p.icon + '-outline'" 
+                  [md]="p.icon + '-sharp'">
+                </ion-icon>
+                <ion-label color="dark">{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
-          }
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          @for (label of labels; track label) {
-            <ion-item lines="none">
-              <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
           }
         </ion-list>
       </ion-content>
