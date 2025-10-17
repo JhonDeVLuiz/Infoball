@@ -21,7 +21,11 @@ export const routes: Routes = [
     loadComponent: () => import('./about/about.page').then( m => m.AboutPage)
   },
   {
-    path: 'service',
-    loadComponent: () => import('./service/service.page').then( m => m.ServicePage)
+    path: 'jogos',
+    loadComponent: () => import('./jogos/jogos.page').then( m => m.JogosPage)
+  },
+  {
+    path: 'editar-jogo/:id',
+    loadComponent: () => import('./editar-jogo/editar-jogo.page').then( m => m.EditarJogoPage)
   },
  ];

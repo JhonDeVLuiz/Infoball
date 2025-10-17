@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
-
 import { ActivatedRoute } from '@angular/router';
 import {
   IonHeader,

@@ -17,6 +17,8 @@ export class AppComponent {
     { title: 'Brasileirão', url: '/folder/inbox', icon: 'football' },
     { title: 'Campeonatos', url: '/noticias', icon: 'trophy' },
     { title: 'Sobre', url: '/about', icon: 'accessibility' },
+    { title: 'Jogos', url: '/jogos', icon: 'archive' },
+    { title: 'Editar Jogo', url: '/editar-jogo', icon: 'archive' },
   ];
  
   constructor() {
