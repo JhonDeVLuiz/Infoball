@@ -28,20 +28,20 @@ app.get('/jogos', async (req, res) => {
     const jogos = await Jogo.find();
     res.json(jogos);
   } catch (err) {
-    console.error('❌ Erro ao buscar jogos:', err);
+    console.error('Erro ao buscar jogos:', err);
     res.status(500).json({ error: 'Erro ao buscar jogos' });
   }
 });
 
 app.post('/jogos', async (req, res) => {
-  console.log('📥 Dados recebidos:', req.body);
+  console.log('Dados recebidos:', req.body);
   try {
     const novoJogo = new Jogo(req.body);
     const resultado = await novoJogo.save();
-    console.log('✅ Jogo salvo:', resultado);
+    console.log(' Jogo salvo:', resultado);
     res.status(201).json(resultado);
   } catch (err) {
-    console.error('❌ Erro ao salvar:', err);
+    console.error('Erro ao salvar:', err);
     res.status(500).json({ error: 'Erro ao salvar jogo' });
   }
 });

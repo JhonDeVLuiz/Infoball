@@ -51,6 +51,7 @@ export class JogosPage implements OnInit {
       error: (err) => console.error('Erro ao remover jogo:', err)
     });
   }
+  
 
   editarJogo(id: string): void {
     this.router.navigate(['/editar-jogo', id]);

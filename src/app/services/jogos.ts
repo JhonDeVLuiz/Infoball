@@ -44,7 +44,9 @@ export class JogosService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  criarJogo(payload: any) {
+ 
+  // renomeado para combinar com a página Cadastrar Jogo
+  cadastrarJogo(payload: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, payload);
   }
 

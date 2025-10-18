@@ -19,6 +19,7 @@ export class AppComponent {
     { title: 'Sobre', url: '/about', icon: 'accessibility' },
     { title: 'Jogos', url: '/jogos', icon: 'archive' },
     { title: 'Editar Jogo', url: '/editar-jogo', icon: 'archive' },
+    { title: 'Cadastrar Jogo', url: '/cadastrar-jogo', icon: 'archive' },
   ];
  
   constructor() {
