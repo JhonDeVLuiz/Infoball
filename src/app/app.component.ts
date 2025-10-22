@@ -18,8 +18,8 @@ export class AppComponent {
     { title: 'Campeonatos', url: '/noticias', icon: 'trophy' },
     { title: 'Sobre', url: '/about', icon: 'accessibility' },
     { title: 'Jogos', url: '/jogos', icon: 'archive' },
-    { title: 'Editar Jogo', url: '/editar-jogo', icon: 'archive' },
-    { title: 'Cadastrar Jogo', url: '/cadastrar-jogo', icon: 'archive' },
+    { title: 'Tabela', url: '/tabela', icon: 'bookmark' },
+    
   ];
  
   constructor() {

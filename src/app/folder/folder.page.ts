@@ -57,4 +57,3 @@ export class FolderPage implements OnInit {
   }
 }
 
-

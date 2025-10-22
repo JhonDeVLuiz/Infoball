@@ -6,6 +6,9 @@ export const routes: Routes = [
     redirectTo: 'folder/inbox',
     pathMatch: 'full'
   },
+  { path: 'tabela', loadComponent: () => import('./tabela/tabela.page').then(m => m.TabelaPage)
+
+   },
   {
     path: 'folder/:id',
     loadComponent: () => import('./folder/folder.page').then(m => m.FolderPage)

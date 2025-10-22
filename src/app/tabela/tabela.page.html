@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tabela</ion-title>
+  </ion-toolbar>
+
+
+<ion-content [fullscreen]="true" color="success">
+  <ion-refresher slot="fixed" (ionRefresh)="carregarTabela()"  color="success">
+    <ion-refresher-content pullingText="Puxe para atualizar" refreshingSpinner="circles" refreshingText="Atualizando..."></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="!loading && tabela.length" color="success">
+    <ion-card *ngFor="let t of tabela" class="tabela-card">
+      <ion-item lines="none">
+        <ion-label>
+          <h2>{{ t.posicao }}º - {{ t.time }}</h2>
+          <p>
+            <ion-icon name="football-outline"></ion-icon> J: {{ t.jogos }} |
+            V: {{ t.vitorias }} |
+            E: {{ t.empates }} |
+            D: {{ t.derrotas }}
+          </p>
+          <p>
+            <ion-icon name="stats-chart-outline"></ion-icon> GP: {{ t.golsPro }} |
+            GC: {{ t.golsContra }} |
+            SG: {{ t.saldoGols }}
+          </p>
+        </ion-label>
+        <ion-badge slot="end" color="success">{{ t.pontos }} pts</ion-badge>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-spinner *ngIf="loading" name="crescent" style="display:block; margin:30px auto;"></ion-spinner>
+
+  <ion-text *ngIf="!loading && !tabela.length && !error" color="medium">
+    <div style="text-align:center; margin-top:30px">
+      Nenhum dado disponível no momento.
+    </div>
+  </ion-text>
+
+  <ion-text *ngIf="error" color="danger">
+    <div style="text-align:center; margin-top:30px">
+      Ocorreu um erro: {{ error }}
+    </div>
+  </ion-text>
+</ion-content>

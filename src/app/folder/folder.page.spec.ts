@@ -1,24 +1,59 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonThumbnail,
+    IonAlert, IonButton 
+ } from '@ionic/angular/standalone';
 
-import { FolderPage } from './folder.page';
+@Component({
+  selector: 'app-folder',
+  templateUrl: './folder.page.html',
+  styleUrls: ['./folder.page.scss'],
+  imports: [IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent,
+    IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonThumbnail,
+  IonAlert, IonButton 
+  ],
+})
+export class FolderPage implements OnInit {
+  public folder!: string;
+  private activatedRoute = inject(ActivatedRoute);
+   
+  // alertButtons = ['OK', 'Cancelar' ];
 
-describe('FolderPage', () => {
-  let component: FolderPage;
-  let fixture: ComponentFixture<FolderPage>;
+  alertButtons = [
+  {
+    text: 'Cancelar',
+    role: 'cancel',
+    cssClass: 'btn-cancelar'
+  },
+  {
+    text: 'OK',
+    role: 'confirm',
+    cssClass: 'btn-ok'
+  }
+];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FolderPage],
-      providers: [provideRouter([])]
-    }).compileComponents();
 
-    fixture = TestBed.createComponent(FolderPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  constructor() {}
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  ngOnInit() {
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+  }
+}
+
