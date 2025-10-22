@@ -46,20 +46,20 @@ export class JogosService {
 
   // utilitários
   buscarPorId(id: string) {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/jogos/${id}`);
   }
 
  
   // renomeado para combinar com a página Cadastrar Jogo
   cadastrarJogo(payload: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, payload);
+    return this.http.post<any>(`${this.apiUrl}/jogos/`, payload);
   }
 
   atualizarJogo(id: string, payload: any) {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, payload);
+    return this.http.put<any>(`${this.apiUrl}/jogos/${id}`, payload);
   }
 
   removerJogo(id: string) {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/jogos/${id}`);
   }
 }
