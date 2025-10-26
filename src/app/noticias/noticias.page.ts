@@ -69,7 +69,7 @@ export class NoticiasPage implements OnInit {
 
   
   
-  futebolApiKey = 'live_8c5a3a39bb0e39223f5457be1471f5';
+  futebolApiKey = 'live_0b235bd52d0857f9b7876c4cc02645';
 
 
   
@@ -117,7 +117,7 @@ export class NoticiasPage implements OnInit {
   }
 }
 
-//  apiKey = 'live_212bb356b6636b66129e445b631c64';
+//  apiKey = 'live_9c43aae5006a2ebd770848fd763ac9';
 //    apiUrl = 'https://api.api-futebol.com.br/v1/campeonatos';
 
 

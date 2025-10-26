@@ -56,11 +56,11 @@
     </ion-list>
 
     <!-- Botões -->
-    <ion-button expand="block" type="submit" [disabled]="jogoForm.invalid">
+    <ion-button expand="block" color="success" type="submit" [disabled]="jogoForm.invalid">
       Salvar
     </ion-button>
 
-    <ion-button expand="block" color="medium" routerLink="/jogos">
+    <ion-button expand="block" color="danger" (click)="cancelar()" routerLink="/jogos">
       Cancelar
     </ion-button>
   </form>

@@ -14,11 +14,11 @@ import { logoLinkedin, trophyOutline, trophy, trophySharp, accessibility, access
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Brasileirão', url: '/folder/inbox', icon: 'football' },
+    { title: 'Brasileirão', url: '/tabela', icon: 'football' },
     { title: 'Campeonatos', url: '/noticias', icon: 'trophy' },
     { title: 'Sobre', url: '/about', icon: 'accessibility' },
     { title: 'Jogos', url: '/jogos', icon: 'archive' },
-    { title: 'Tabela', url: '/tabela', icon: 'bookmark' },
+    
     
   ];
  

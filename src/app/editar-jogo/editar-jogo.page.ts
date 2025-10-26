@@ -94,4 +94,13 @@ export class EditarJogoPage implements OnInit {
       }
     });
   }
+  async cancelar(): Promise<void> {
+    const toast = await this.toastCtrl.create({
+      message: 'Edição cancelada',
+      duration: 2000,
+      color: 'medium'
+    });
+    await toast.present();
+    this.router.navigate(['/jogos']);
+  }
 }
