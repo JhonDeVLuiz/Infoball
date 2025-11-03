@@ -72,19 +72,35 @@ app.delete('/jogos/:id', async (req, res) => {
   }
 });
 
-// Funções auxiliares
 function calcularTabela(jogos) {
-  const times = {};
-  
+  const timesMap = new Map();
+
   jogos.forEach(jogo => {
-    if (!times[jogo.timeCasa]) times[jogo.timeCasa] = criarTime(jogo.timeCasa);
-    if (!times[jogo.timeVisitante]) times[jogo.timeVisitante] = criarTime(jogo.timeVisitante);
+    // normaliza nomes para chave (remove espaços extras e ignora caixa)
+    const chaveCasa = String(jogo.timeCasa).trim().toLowerCase();
+    const chaveVisitante = String(jogo.timeVisitante).trim().toLowerCase();
 
-    const timeCasa = times[jogo.timeCasa];
-    const timeVisitante = times[jogo.timeVisitante];
+    // cria entrada se necessário, mantendo o nome original de exibição da primeira ocorrência
+    if (!timesMap.has(chaveCasa)) {
+      timesMap.set(chaveCasa, criarTime(jogo.timeCasa.trim()));
+    }
+    if (!timesMap.has(chaveVisitante)) {
+      timesMap.set(chaveVisitante, criarTime(jogo.timeVisitante.trim()));
+    }
 
-    atualizarEstatisticas(timeCasa, jogo.placarCasa, jogo.placarVisitante);
-    atualizarEstatisticas(timeVisitante, jogo.placarVisitante, jogo.placarCasa);
+    const timeCasa = timesMap.get(chaveCasa);
+    const timeVisitante = timesMap.get(chaveVisitante);
+
+    timeCasa.jogos++;
+    timeVisitante.jogos++;
+
+    timeCasa.golsPro += Number(jogo.placarCasa) || 0;
+    timeCasa.golsContra += Number(jogo.placarVisitante) || 0;
+    timeCasa.saldoGols = timeCasa.golsPro - timeCasa.golsContra;
+
+    timeVisitante.golsPro += Number(jogo.placarVisitante) || 0;
+    timeVisitante.golsContra += Number(jogo.placarCasa) || 0;
+    timeVisitante.saldoGols = timeVisitante.golsPro - timeVisitante.golsContra;
 
     if (jogo.placarCasa > jogo.placarVisitante) {
       timeCasa.pontos += 3;
@@ -102,14 +118,17 @@ function calcularTabela(jogos) {
     }
   });
 
-  return Object.values(times)
+  const tabela = Array.from(timesMap.values())
     .sort((a, b) => b.pontos - a.pontos || b.saldoGols - a.saldoGols || b.golsPro - a.golsPro)
     .map((time, index) => ({
       ...time,
       posicao: index + 1,
-      aproveitamento: time.jogos > 0 ? ((time.pontos / (time.jogos * 3)) * 100).toFixed(1) : 0
+      aproveitamento: time.jogos > 0 ? ((time.pontos / (time.jogos * 3)) * 100).toFixed(1) : '0.0'
     }));
+
+  return tabela;
 }
+
 
 function criarTime(nome) {
   return {

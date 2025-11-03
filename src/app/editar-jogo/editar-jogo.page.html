@@ -8,7 +8,7 @@
   <form [formGroup]="jogoForm" (ngSubmit)="salvar()">
     <ion-list>
 
-      <!-- Time da Casa -->
+      
       <ion-item>
         <ion-label position="stacked">Time da Casa</ion-label>
         <ion-input formControlName="timeCasa"></ion-input>
@@ -16,8 +16,7 @@
       <ion-text color="danger" *ngIf="jogoForm.get('timeCasa')?.touched && jogoForm.get('timeCasa')?.invalid">
         <small>O time da casa é obrigatório.</small>
       </ion-text>
-
-      <!-- Placar da Casa -->
+     
       <ion-item>
         <ion-label position="stacked">Placar da Casa</ion-label>
         <ion-input type="number" formControlName="placarCasa"></ion-input>
@@ -26,7 +25,6 @@
         <small>Informe um placar válido (mínimo 0).</small>
       </ion-text>
 
-      <!-- Placar Visitante -->
       <ion-item>
         <ion-label position="stacked">Placar Visitante</ion-label>
         <ion-input type="number" formControlName="placarVisitante"></ion-input>
@@ -35,7 +33,7 @@
         <small>Informe um placar válido (mínimo 0).</small>
       </ion-text>
 
-      <!-- Time Visitante -->
+      
       <ion-item>
         <ion-label position="stacked">Time Visitante</ion-label>
         <ion-input formControlName="timeVisitante"></ion-input>
@@ -44,7 +42,7 @@
         <small>O time visitante é obrigatório.</small>
       </ion-text>
 
-      <!-- Rodada -->
+   
       <ion-item>
         <ion-label position="stacked">Rodada</ion-label>
         <ion-input type="number" formControlName="rodada"></ion-input>
@@ -55,7 +53,7 @@
 
     </ion-list>
 
-    <!-- Botões -->
+  
     <ion-button expand="block" color="success" type="submit" [disabled]="jogoForm.invalid">
       Salvar
     </ion-button>

@@ -26,10 +26,10 @@ export class EditarJogoPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // ✅ Captura o id da rota
+    
     this.id = this.route.snapshot.paramMap.get('id')!;
 
-    // ✅ Cria o formulário (sem campo _id)
+   
     this.jogoForm = this.fb.group({
       timeCasa: ['', Validators.required],
       placarCasa: [0, [Validators.required, Validators.min(0)]],
@@ -38,7 +38,7 @@ export class EditarJogoPage implements OnInit {
       rodada: [1, [Validators.required, Validators.min(1)]]
     });
     
-    // ✅ Substituir a captura simples do id por uma subscription
+    
   this.route.paramMap.subscribe(params => {
     const id = params.get('id');
     console.log('Param id:', id);
@@ -48,7 +48,6 @@ export class EditarJogoPage implements OnInit {
     }
     this.id = id;
 
-    // Carrega os dados do jogo pelo id
     this.jogosService.buscarPorId(this.id).subscribe({
       next: (jogo) => this.jogoForm.patchValue(jogo),
       error: (err) => console.error('Erro ao carregar jogo:', err)

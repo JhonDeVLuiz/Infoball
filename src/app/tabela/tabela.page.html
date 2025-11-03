@@ -16,13 +16,7 @@
     <ion-card *ngFor="let t of tabela" class="tabela-card">
       <ion-item lines="none">
         <ion-label>
-          <h2>{{ t.posicao }}º - {{ t.time }}</h2>
-          <p>
-            <ion-icon name="football-outline"></ion-icon> J: {{ t.jogos }} |
-            V: {{ t.vitorias }} |
-            E: {{ t.empates }} |
-            D: {{ t.derrotas }}
-          </p>
+          <h2>{{ t.posicao }}º - {{ t.time }}</h2><ion-icon name="football-outline"></ion-icon> J: {{ t.jogos }} | V: {{ t.vitorias }} | E: {{ t.empates }} | D: {{ t.derrotas }}.
           <p>
             <ion-icon name="stats-chart-outline"></ion-icon> GP: {{ t.golsPro }} |
             GC: {{ t.golsContra }} |
