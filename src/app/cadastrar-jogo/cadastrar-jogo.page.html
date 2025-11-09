@@ -1,67 +1,80 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastrar Jogo</ion-title>
+    <ion-title>
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      Cadastrar Jogo
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="jogoForm" (ngSubmit)="salvar()">
-    <ion-list>
+<ion-content class="ion-padding" color="success">
+  <form [formGroup]="jogoForm" (ngSubmit)="salvar()" novalidate>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dados da Partida</ion-card-title>
+        <ion-card-subtitle>Preencha os campos abaixo</ion-card-subtitle>
+      </ion-card-header>
 
-      <!-- Time da Casa -->
-      <ion-item>
-        <ion-label position="stacked">Time da Casa</ion-label>
-        <ion-input formControlName="timeCasa" autocomplete="off"></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="jogoForm.get('timeCasa')?.touched && jogoForm.get('timeCasa')?.invalid">
-        <small>O time da casa é obrigatório.</small>
-      </ion-text>
+      <ion-card-content>
+        <!-- Time da Casa -->
+        <ion-item lines="full">
+          <ion-label position="floating">Time da Casa</ion-label>
+          <ion-input formControlName="timeCasa" autocomplete="off" aria-label="Time da Casa"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="jogoForm.get('timeCasa')?.touched && jogoForm.get('timeCasa')?.invalid">
+          O time da casa é obrigatório.
+        </ion-text>
 
-      <!-- Placar da Casa -->
-      <ion-item>
-        <ion-label position="stacked">Placar da Casa</ion-label>
-        <ion-input type="number" formControlName="placarCasa" inputmode="numeric"></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="jogoForm.get('placarCasa')?.touched && jogoForm.get('placarCasa')?.invalid">
-        <small>Informe um placar válido (mínimo 0).</small>
-      </ion-text>
+        <!-- Placar da Casa -->
+        <ion-item lines="full">
+          <ion-label position="floating">Placar da Casa</ion-label>
+          <ion-input type="number" formControlName="placarCasa" inputmode="numeric" min="0"
+            aria-label="Placar da Casa"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="jogoForm.get('placarCasa')?.touched && jogoForm.get('placarCasa')?.invalid">
+          Informe um placar válido (mínimo 0).
+        </ion-text>
 
-      <!-- Time Visitante -->
-      <ion-item>
-        <ion-label position="stacked">Placar Visitante</ion-label>
-        <ion-input type="number" formControlName="placarVisitante" inputmode="numeric"></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="jogoForm.get('placarVisitante')?.touched && jogoForm.get('placarVisitante')?.invalid">
-        <small>Informe um placar válido (mínimo 0).</small>
-      </ion-text>
+        <!-- Placar Visitante -->
+        <ion-item lines="full">
+          <ion-label position="floating">Placar Visitante</ion-label>
+          <ion-input type="number" formControlName="placarVisitante" inputmode="numeric" min="0"
+            aria-label="Placar Visitante"></ion-input>
+        </ion-item>
+        <ion-text color="danger"
+          *ngIf="jogoForm.get('placarVisitante')?.touched && jogoForm.get('placarVisitante')?.invalid">
+          Informe um placar válido (mínimo 0).
+        </ion-text>
 
-      <!-- Placar Visitante -->
-      <ion-item>
-        <ion-label position="stacked">Time Visitante</ion-label>
-        <ion-input formControlName="timeVisitante" autocomplete="off"></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="jogoForm.get('timeVisitante')?.touched && jogoForm.get('timeVisitante')?.invalid">
-        <small>O time visitante é obrigatório.</small>
-      </ion-text>
+        <!-- Time Visitante -->
+        <ion-item lines="full">
+          <ion-label position="floating">Time Visitante</ion-label>
+          <ion-input formControlName="timeVisitante" autocomplete="off" aria-label="Time Visitante"></ion-input>
+        </ion-item>
+        <ion-text color="danger"
+          *ngIf="jogoForm.get('timeVisitante')?.touched && jogoForm.get('timeVisitante')?.invalid">
+          O time visitante é obrigatório.
+        </ion-text>
 
-      <!-- Rodada -->
-      <ion-item>
-        <ion-label position="stacked">Rodada</ion-label>
-        <ion-input type="number" formControlName="rodada" inputmode="numeric"></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="jogoForm.get('rodada')?.touched && jogoForm.get('rodada')?.invalid">
-        <small>Informe uma rodada válida (mínimo 1).</small>
-      </ion-text>
+        <!-- Rodada -->
+        <ion-item lines="full">
+          <ion-label position="floating">Rodada</ion-label>
+          <ion-input type="number" formControlName="rodada" inputmode="numeric" min="1" aria-label="Rodada"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="jogoForm.get('rodada')?.touched && jogoForm.get('rodada')?.invalid">
+          Informe uma rodada válida (mínimo 1).
+        </ion-text>
+      </ion-card-content>
+      <div class="ion-margin-top">
+      <ion-button expand="block" color="success" type="submit" [disabled]="jogoForm.invalid">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        Salvar
+      </ion-button>
 
-    </ion-list>
-
-    <!-- Botões -->
-    <ion-button expand="block" type="submit" color="success" [disabled]="jogoForm.invalid">
-      Cadastrar
-    </ion-button>
-
-    <ion-button expand="block" color="danger" routerLink="/jogos">
-      Cancelar
-    </ion-button>
+       <ion-button expand="block" color="danger" routerLink="/jogos">
+         Cancelar
+         </ion-button>
+    </div>
+    </ion-card>
   </form>
 </ion-content>

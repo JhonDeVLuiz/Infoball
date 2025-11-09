@@ -11,7 +11,7 @@ mongoose.connect('mongodb+srv://devjhon01010:lita1970@cluster0.6p96o.mongodb.net
   .then(() => console.log('Conectado ao MongoDB'))
   .catch(err => console.error('Erro ao conectar:', err));
 
-// Modelo de Jogo
+
 const JogoSchema = new mongoose.Schema({
   timeCasa: { type: String, required: true },
   timeVisitante: { type: String, required: true },
@@ -22,7 +22,6 @@ const JogoSchema = new mongoose.Schema({
 
 const Jogo = mongoose.model('Jogo', JogoSchema);
 
-// Rotas
 app.get('/jogos', async (req, res) => {
   try {
     const jogos = await Jogo.find();

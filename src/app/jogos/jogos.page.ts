@@ -30,20 +30,43 @@ export class JogosPage implements OnInit {
     this.carregarJogos();
   }
 
-  carregarJogos(): void {
-    this.loading = true;
-    this.jogosService.loadJogos().subscribe({
-      next: (data) => {
-        this.jogos = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar jogos:', err);
-        this.error = 'Erro ao carregar jogos';
-        this.loading = false;
-      }
-    });
+  ionViewWillEnter(): void {
+    if (this.loading) return;
+    this.carregarJogos();
   }
+
+  // carregarJogos(): void {
+  //   this.loading = true;
+  //   this.jogosService.loadJogos().subscribe({
+  //     next: (data) => {
+  //       this.jogos = data;
+  //       this.loading = false;
+  //     },
+  //     error: (err) => {
+  //       console.error('Erro ao carregar jogos:', err);
+  //       this.error = 'Erro ao carregar jogos';
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
+
+  carregarJogos(): void {
+  this.loading = true;
+  this.error = '';
+
+  this.jogosService.loadJogos().subscribe({
+    next: (data) => {
+      this.jogos = [...data]; // clona o array para garantir nova referência
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('Erro ao carregar jogos:', err);
+      this.error = 'Erro ao carregar jogos';
+      this.loading = false;
+    }
+  });
+}
+
 
   deletar(id: string): void {
     this.jogosService.removerJogo(id).subscribe({

@@ -20,7 +20,7 @@ export class JogosService {
   this.loading = true;
   this.error = '';
   
-
+  
     return new Observable<any[]>(observer => {
     this.http.get<any[]>(`${this.apiUrl}/jogos`).subscribe({
       next: (response) => {
