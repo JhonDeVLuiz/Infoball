@@ -11,21 +11,49 @@ mongoose.connect('mongodb+srv://devjhon01010:lita1970@cluster0.6p96o.mongodb.net
   .then(() => console.log('Conectado ao MongoDB'))
   .catch(err => console.error('Erro ao conectar:', err));
 
-
+// Schema
 const JogoSchema = new mongoose.Schema({
   timeCasa: { type: String, required: true },
   timeVisitante: { type: String, required: true },
   placarCasa: { type: Number, required: true },
   placarVisitante: { type: Number, required: true },
-  rodada: { type: Number, default: 1 }
+  rodada: { type: Number, default: 1 },
+  data: { type: Date, default: Date.now }
 });
 
 const Jogo = mongoose.model('Jogo', JogoSchema);
 
+// Rotas
 app.get('/jogos', async (req, res) => {
   try {
-    const jogos = await Jogo.find();
-    res.json(jogos);
+    const { time, data } = req.query;
+    let query = {};
+
+    if (time) {
+      query.$or = [
+        { timeCasa: { $regex: time, $options: 'i' } },
+        { timeVisitante: { $regex: time, $options: 'i' } }
+      ];
+    }
+
+    if (data) {
+      const dia = new Date(data);
+      const diaSeguinte = new Date(data);
+      diaSeguinte.setDate(dia.getDate() + 1);
+
+      query.data = {
+        $gte: dia,
+        $lt: diaSeguinte
+      };
+    }
+
+    const jogos = await Jogo.find(query);
+    const formatados = jogos.map(j => ({
+      ...j._doc,
+      data: j.data.toLocaleDateString('pt-BR') // ex: 16/11/2025
+    }));
+
+    res.json(formatados);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao buscar jogos' });
   }
@@ -71,15 +99,14 @@ app.delete('/jogos/:id', async (req, res) => {
   }
 });
 
+// Funções auxiliares
 function calcularTabela(jogos) {
   const timesMap = new Map();
 
   jogos.forEach(jogo => {
-    // normaliza nomes para chave (remove espaços extras e ignora caixa)
     const chaveCasa = String(jogo.timeCasa).trim().toLowerCase();
     const chaveVisitante = String(jogo.timeVisitante).trim().toLowerCase();
 
-    // cria entrada se necessário, mantendo o nome original de exibição da primeira ocorrência
     if (!timesMap.has(chaveCasa)) {
       timesMap.set(chaveCasa, criarTime(jogo.timeCasa.trim()));
     }
@@ -127,7 +154,6 @@ function calcularTabela(jogos) {
 
   return tabela;
 }
-
 
 function criarTime(nome) {
   return {

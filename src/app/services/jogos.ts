@@ -16,13 +16,29 @@ export class JogosService {
 
   constructor(private http: HttpClient) {}
 
-  loadJogos(): Observable<any[]> {
+  loadJogos(data?: string, time?: string): Observable<any[]> {
   this.loading = true;
   this.error = '';
   
+  let url = `${this.apiUrl}/jogos`;
+  const params = new URLSearchParams();
+
+  if (data) {
+    const dataObj = new Date(data);
+    const dataFormatada = dataObj.toISOString().split('T')[0];
+    params.append('data', dataFormatada);
+  }
+  if (time) {
+    params.append('time', time);
+  }
+
+  const queryString = params.toString();
+  if (queryString) {
+    url += `?${queryString}`;
+  }
   
     return new Observable<any[]>(observer => {
-    this.http.get<any[]>(`${this.apiUrl}/jogos`).subscribe({
+    this.http.get<any[]>(url).subscribe({
       next: (response) => {
         this.jogosDataOriginal = response || [];
         this.jogosData = [...this.jogosDataOriginal];
