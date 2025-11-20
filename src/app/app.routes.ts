@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/inbox',
+    redirectTo: 'tabela',
     pathMatch: 'full'
   },
   { path: 'tabela', loadComponent: () => import('./tabela/tabela.page').then(m => m.TabelaPage)
