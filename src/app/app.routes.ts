@@ -6,7 +6,8 @@ export const routes: Routes = [
     redirectTo: 'tabela',
     pathMatch: 'full'
   },
-  { path: 'tabela', loadComponent: () => import('./tabela/tabela.page').then(m => m.TabelaPage)
+  { path: 'tabela',
+    loadComponent: () => import('./tabela/tabela.page').then(m => m.TabelaPage)
 
    },
     {

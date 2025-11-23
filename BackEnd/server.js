@@ -178,6 +178,6 @@ function atualizarEstatisticas(time, golsPro, golsContra) {
 
 // Iniciar servidor
 const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando: http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Servidor rodando: http://0.0.0.0:${PORT}`);
 });

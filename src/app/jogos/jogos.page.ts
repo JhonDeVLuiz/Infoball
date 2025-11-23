@@ -29,16 +29,20 @@ export class JogosPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('JogosPage: ngOnInit - Inicializando componente');
     this.folder = 'jogos';
     this.carregarJogos();
   }
 
   ionViewWillEnter(): void {
-    if (this.loading) return;
-    this.carregarJogos();
+    if (this.loading) {
+      return;
+    }
+       this.carregarJogos();
   }
 
   carregarJogos(data?: string, time?: string): void {
+    console.log('JogosPage: carregarJogos - Iniciando carregamento de jogos com data:', data, 'e time:', time);
     this.loading = true;
     this.error = '';
 
@@ -46,6 +50,7 @@ export class JogosPage implements OnInit {
       next: (data) => {
         this.jogos = [...data];
         this.loading = false;
+        console.log('JogosPage: carregarJogos - Jogos carregados:', this.jogos);
       },
       error: (err) => {
         console.error('Erro ao carregar jogos:', err);
@@ -106,4 +111,6 @@ export class JogosPage implements OnInit {
 
     await alert.present();
   }
+
+
 }
