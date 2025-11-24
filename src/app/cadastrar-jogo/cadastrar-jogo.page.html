@@ -19,7 +19,7 @@
         <!-- Time da Casa -->
         <ion-item lines="full">
           <ion-label position="floating">Time da Casa</ion-label>
-          <ion-input formControlName="timeCasa"></ion-input>
+          <ion-input formControlName="timeCasa" autocomplete="off" aria-label="Time da Casa"></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="jogoForm.get('timeCasa')?.touched && jogoForm.get('timeCasa')?.invalid">
           O time da casa é obrigatório.
@@ -28,7 +28,8 @@
         <!-- Placar da Casa -->
         <ion-item lines="full">
           <ion-label position="floating">Placar da Casa</ion-label>
-          <ion-input type="number" formControlName="placarCasa" inputmode="decimal" min="0"></ion-input>
+          <ion-input type="number" formControlName="placarCasa" inputmode="numeric" min="0"
+            aria-label="Placar da Casa"></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="jogoForm.get('placarCasa')?.touched && jogoForm.get('placarCasa')?.invalid">
           Informe um placar válido (mínimo 0).
@@ -37,7 +38,8 @@
         <!-- Placar Visitante -->
         <ion-item lines="full">
           <ion-label position="floating">Placar Visitante</ion-label>
-          <ion-input type="number" formControlName="placarVisitante" inputmode="decimal" min="0"></ion-input>
+          <ion-input type="number" formControlName="placarVisitante" inputmode="numeric" min="0"
+            aria-label="Placar Visitante"></ion-input>
         </ion-item>
         <ion-text color="danger"
           *ngIf="jogoForm.get('placarVisitante')?.touched && jogoForm.get('placarVisitante')?.invalid">
@@ -47,7 +49,7 @@
         <!-- Time Visitante -->
         <ion-item lines="full">
           <ion-label position="floating">Time Visitante</ion-label>
-          <ion-input formControlName="timeVisitante"></ion-input>
+          <ion-input formControlName="timeVisitante" autocomplete="off" aria-label="Time Visitante"></ion-input>
         </ion-item>
         <ion-text color="danger"
           *ngIf="jogoForm.get('timeVisitante')?.touched && jogoForm.get('timeVisitante')?.invalid">
@@ -57,7 +59,7 @@
         <!-- Rodada -->
         <ion-item lines="full">
           <ion-label position="floating">Rodada</ion-label>
-          <ion-input type="number" formControlName="rodada" inputmode="decimal" min="1"></ion-input>
+          <ion-input type="number" formControlName="rodada" inputmode="numeric" min="1" aria-label="Rodada"></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="jogoForm.get('rodada')?.touched && jogoForm.get('rodada')?.invalid">
           Informe uma rodada válida (mínimo 1).

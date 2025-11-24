@@ -12,7 +12,7 @@ export class JogosService {
   public error = '';
 
   // Se testar no celular substitua "localhost" pelo IP da sua máquina: ex 'http://192.168.0.100:3000/jogos'
-  private apiUrl = ' https://backend-infoboll.onrender.com';
+  private apiUrl = 'http://192.168.0.108:3000';
 
   constructor(private http: HttpClient) {}
 

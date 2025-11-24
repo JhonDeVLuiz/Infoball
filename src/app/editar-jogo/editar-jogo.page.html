@@ -20,7 +20,7 @@
       <ion-card-content>
         <!-- Time da Casa -->
         <ion-item>
-          <ion-label position="floating">Time da Casa</ion-label>
+          <ion-label position="floating"> Time da Casa</ion-label>
           <ion-input formControlName="timeCasa"></ion-input>
         </ion-item>
         <ion-note color="danger" *ngIf="jogoForm.get('timeCasa')?.touched && jogoForm.get('timeCasa')?.invalid">
@@ -29,8 +29,8 @@
 
         <!-- Placar da Casa -->
         <ion-item>
-          <ion-label position="floating">Placar da Casa</ion-label>
-          <ion-input type="number" formControlName="placarCasa" inputmode="decimal" min="0"></ion-input>
+          <ion-label position="floating"> Placar da Casa</ion-label>
+          <ion-input type="number" formControlName="placarCasa"></ion-input>
         </ion-item>
         <ion-note color="danger" *ngIf="jogoForm.get('placarCasa')?.touched && jogoForm.get('placarCasa')?.invalid">
           Informe um placar válido (mínimo 0).
@@ -38,8 +38,8 @@
 
         <!-- Placar Visitante -->
         <ion-item>
-          <ion-label position="floating">Placar Visitante</ion-label>
-          <ion-input type="number" formControlName="placarVisitante" inputmode="decimal" min="0"></ion-input>
+          <ion-label position="floating"> Placar Visitante</ion-label>
+          <ion-input type="number" formControlName="placarVisitante"></ion-input>
         </ion-item>
         <ion-note color="danger" *ngIf="jogoForm.get('placarVisitante')?.touched && jogoForm.get('placarVisitante')?.invalid">
           Informe um placar válido (mínimo 0).
@@ -47,7 +47,7 @@
 
         <!-- Time Visitante -->
         <ion-item>
-          <ion-label position="floating">Time Visitante</ion-label>
+          <ion-label position="floating"> Time Visitante</ion-label>
           <ion-input formControlName="timeVisitante"></ion-input>
         </ion-item>
         <ion-note color="danger" *ngIf="jogoForm.get('timeVisitante')?.touched && jogoForm.get('timeVisitante')?.invalid">
@@ -56,8 +56,8 @@
 
         <!-- Rodada -->
         <ion-item>
-          <ion-label position="floating">Rodada</ion-label>
-          <ion-input type="number" formControlName="rodada" inputmode="decimal" min="1"></ion-input>
+          <ion-label position="floating"> Rodada</ion-label>
+          <ion-input type="number" formControlName="rodada"></ion-input>
         </ion-item>
         <ion-note color="danger" *ngIf="jogoForm.get('rodada')?.touched && jogoForm.get('rodada')?.invalid">
           Informe uma rodada válida (mínimo 1).
@@ -69,7 +69,7 @@
         Salvar
       </ion-button>
 
-      <ion-button expand="block" color="danger" (click)="cancelar()" routerLink="/jogos">
+      <ion-button expand="block" color="medium" (click)="cancelar()" routerLink="/jogos">
         <ion-icon name="close-circle-outline" slot="start"></ion-icon>
         Cancelar
       </ion-button>
