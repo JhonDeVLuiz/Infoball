@@ -19,7 +19,6 @@ export class JogosPage implements OnInit {
   jogos: any[] = [];
   loading = false;
   error = '';
-  dataFiltro: string = '';
   termoBusca: string = '';
 
   constructor(
@@ -41,12 +40,12 @@ export class JogosPage implements OnInit {
        this.carregarJogos();
   }
 
-  carregarJogos(data?: string, time?: string): void {
-    console.log('JogosPage: carregarJogos - Iniciando carregamento de jogos com data:', data, 'e time:', time);
+  carregarJogos(time?: string): void {
+    console.log('JogosPage: carregarJogos - Iniciando carregamento de jogos com time:', time);
     this.loading = true;
     this.error = '';
 
-    this.jogosService.loadJogos(data, time).subscribe({
+    this.jogosService.loadJogos(undefined, time).subscribe({
       next: (data) => {
         this.jogos = [...data];
         this.loading = false;
@@ -61,15 +60,10 @@ export class JogosPage implements OnInit {
   }
 
   buscar(): void {
-    this.carregarJogos(this.dataFiltro, this.termoBusca);
-  }
-
-  filtrarPorData(): void {
-    this.carregarJogos(this.dataFiltro, this.termoBusca);
+    this.carregarJogos(this.termoBusca);
   }
 
   limparFiltro(): void {
-    this.dataFiltro = '';
     this.termoBusca = '';
     this.carregarJogos();
   }

@@ -12,7 +12,7 @@ export class JogosService {
   public error = '';
 
   // Se testar no celular substitua "localhost" pelo IP da sua máquina: ex 'http://192.168.0.100:3000/jogos'
-  private apiUrl = 'http://192.168.0.108:3000';
+  private apiUrl = 'https://backend-infoboll.onrender.com';
 
   constructor(private http: HttpClient) {}
 
@@ -40,6 +40,7 @@ export class JogosService {
     return new Observable<any[]>(observer => {
     this.http.get<any[]>(url).subscribe({
       next: (response) => {
+        console.log('Dados recebidos do backend:', response); // Adicionado para depuração
         this.jogosDataOriginal = response || [];
         this.jogosData = [...this.jogosDataOriginal];
         this.loading = false;
@@ -50,6 +51,7 @@ export class JogosService {
         this.error = 'Erro ao carregar jogos.';
         this.loading = false;
         console.error('Erro API Jogos:', err);
+        console.error('Detalhes do erro (após edição):', err); // Modificado para depuração
         observer.error(err);
       }
     });

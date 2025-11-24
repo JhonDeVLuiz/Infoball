@@ -22,10 +22,6 @@
 
   <div class="search-card" >
     <ion-searchbar [(ngModel)]="termoBusca" placeholder="Buscar por time"></ion-searchbar>
-    <ion-item>
-      <ion-label>Data</ion-label>
-      <ion-input type="date" color="light" [(ngModel)]="dataFiltro"></ion-input>
-    </ion-item>
     <div class="button-group">
       <ion-button class="filter-button" (click)="buscar()">
         <ion-icon name="funnel-outline" slot="start"></ion-icon>
@@ -43,7 +39,6 @@
       <ion-label>
         <h2>{{ jogo.timeCasa }} {{ jogo.placarCasa }} x {{ jogo.placarVisitante }} {{ jogo.timeVisitante }}</h2>
         <p *ngIf="jogo.rodada">Rodada: {{ jogo.rodada }}</p>
-        <p>Data: {{ jogo.data }}</p>
       </ion-label>
            <ion-buttons slot="end">
            <ion-button fill="outline" color="primary" [routerLink]="['/editar-jogo', jogo._id]">
